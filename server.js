@@ -26,6 +26,6 @@ app.get('/:shortUrl', async (req, res)=>{
 
     res.redirect(shortUrl.full);
 })
-app.listen(3000, async (req, res)=>{
+app.listen(process.env.PORT || 3000, async (req, res)=>{
     await console.log('server started at port 3000');
 })
