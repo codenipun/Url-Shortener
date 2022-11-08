@@ -9,15 +9,15 @@ mongoose.connect('mongodb+srv://nipunjain:nipun123@cluster0.51qfxei.mongodb.net/
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended : false}))
 
-app.get('/', async (req,res)=>{
+app.get("/", async (req,res)=>{
     const shortUrls = await ShortUrl.find();
     res.render('index', {shortUrl : shortUrls});
 })
 app.post("/shortUrls", (req, res)=>{
     ShortUrl.create({full : req.body.fullUrl})
-    res.redirect('/')
+    res.redirect("/")
 })
-app.get('/:shortUrl', async (req, res)=>{
+app.get("/:shortUrl", async (req, res)=>{
     const shortUrl = await ShortUrl.findOne({short : req.params.shortUrl})
     if(shortUrl==null) return res.sendStatus(404)
 
@@ -26,6 +26,6 @@ app.get('/:shortUrl', async (req, res)=>{
 
     res.redirect(shortUrl.full);
 })
-app.listen(process.env.PORT || 3000, async (req, res)=>{
-    await console.log('server started at port 3000');
+app.listen(process.env.PORT || 3000, (req, res)=>{
+    console.log('server started at port 3000');
 })
